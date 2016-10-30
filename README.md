@@ -17,6 +17,8 @@ Communication with the database is done using the PDO extension. The platform is
 
 Data related platform are stored in a SQLite database, no longer need for a new database. It included a store of objects (Item-Shop). It can add items with bonuses and can make payments with paypal for dragon coin.
 
+### Installation
+
 Attention! Order to that the website to work properly, last_play table must be updated. This script is provided along with the market.
 
      /*********
@@ -48,3 +50,4 @@ Attention! Order to that the website to work properly, last_play table must be u
     		std::auto_ptr<SQLMsg> sUpdate(DBManager::instance().DirectQuery(pUpdateTime));
     	}
     #endif
+**All you have to do now is to edit the file `config.php`.**
