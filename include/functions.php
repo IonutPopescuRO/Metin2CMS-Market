@@ -20,6 +20,21 @@ try {
 	die("The Connection to the database of market is not available.");
 }
 
+function url_redirect($url) {
+	if(!headers_sent()) {
+		header('Location: '.$url);
+		exit;
+	} else {
+		echo '<script type="text/javascript">';
+		echo 'window.location.href="'.$url.'";';
+		echo '</script>';
+		echo '<noscript>';
+		echo '<meta http-equiv="refresh" content="0;url='.$url.'" />';
+		echo '</noscript>';
+		exit;
+	}
+}
+
 function login($uname,$upass,$shop=0)
 {
 	global $account;
@@ -36,9 +51,9 @@ function login($uname,$upass,$shop=0)
 			$_SESSION['id'] = $userRow['id'];
 			$_SESSION['fingerprint'] = md5($_SERVER['HTTP_USER_AGENT'] . 'x' . $_SERVER['REMOTE_ADDR']);
 			if($shop)
-				header("Location: shop?p=home");
+				url_redirect("shop?p=home");
 			else
-				header("Location: index.php?p=home");
+				url_redirect("index.php?p=home");
 			return true;
 		} else {
             print '<div class="alert alert-dismissible alert-warning">
@@ -73,13 +88,13 @@ function redirect($url)
 	
 	$pages = array("characters", "inventory", "sell", "buy", "claim");
 	if (in_array($url, $pages) && !is_loggedin())
-		header("Location: index.php?p=login");
+		url_redirect("index.php?p=login");
 	
 	if($url=='login' && is_loggedin())
-		header("Location: index.php?p=home");
+		url_redirect("index.php?p=home");
 
 	if($url=='admin' && (!is_loggedin() || web_admin_level()<$minim_web_admin_level))
-		header("Location: index.php?p=home");
+		url_redirect("index.php?p=home");
 }
 
 function redirect_shop($url)
@@ -87,27 +102,27 @@ function redirect_shop($url)
 	global $minim_web_admin_level;
 	
 	if ($url=='coins' && !is_loggedin())
-		header("Location: shop?p=login");
+		url_redirect("shop?p=login");
 	
 	if($url=='login' && is_loggedin())
-		header("Location: shop?p=home");
+		url_redirect("shop?p=home");
 	
 	if(($url=='categories' || $url=='add_items' || $url=='paypal') && (!is_loggedin() || web_admin_level()<$minim_web_admin_level))
-		header("Location: shop?p=home");
+		url_redirect("shop?p=home");
 }
 
 function logout()
 {
 	session_destroy();
 	unset($_SESSION['id']);
-	header("Location: index.php?p=login");
+	url_redirect("index.php?p=login");
 }
 
 function logout_shop()
 {
 	session_destroy();
 	unset($_SESSION['id']);
-	header("Location: shop?p=login");
+	url_redirect("shop?p=login");
 }
 
 function total_gold()

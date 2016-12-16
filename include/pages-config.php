@@ -9,9 +9,9 @@
 		if($character)
 		{
 			if(!character_check($character))
-				header("Location: index.php?p=characters");
+				url_redirect("index.php?p=characters");
 		}
-		else header("Location: index.php?p=characters");
+		else url_redirect("index.php?p=characters");
 	}
 	
 	if($current_page=='sell')
@@ -20,7 +20,7 @@
 		$item = array();
 		$item = items_select($character, $pos);
 		if(!isset($item[0]['pos']))
-			header("Location: index.php?p=inventory&character=".$character);
+			url_redirect("index.php?p=inventory&character=".$character);
 	}
 	
 	license();
@@ -34,7 +34,7 @@
 		$check = array();
 		$check = check_item_available_market($vnum);
 		if(!isset($check[0]['id']))
-			header("Location: index.php");	
+			url_redirect("index.php");	
 	}
 	if($current_page=='buy')
 	{
@@ -42,7 +42,7 @@
 		$item = array();
 		$item = items_select_market($id);
 		if(!isset($item[0]['id']))
-			header("Location: index.php");
+			url_redirect("index.php");
 	}
 
 ?>

@@ -12,11 +12,11 @@
 		$item = is_item_select($get_item);
 		
 		if($current_page=='buy' && is_coins($item[0]['pay_type']-1)<$item[0]['coins'])
-			header("Location: shop.php?p=items&category=".$item[0]['category']);
+			url_redirect("shop.php?p=items&category=".$item[0]['category']);
 	}
 	
 	if(($current_page=='items' || $current_page=='add_items') && !is_check_category($get_category))
-		header("Location: shop.php");
+		url_redirect("shop.php");
 	
 	if($current_page=='items' && is_loggedin() && web_admin_level()>=$minim_web_admin_level)
 	{
@@ -26,7 +26,7 @@
 	}
 
 	if(($current_page=='item' || $current_page=='buy') && !is_check_item($get_item))
-		header("Location: shop.php");
+		url_redirect("shop.php");
 	
 	redirect_shop($current_page);
 	
@@ -62,8 +62,8 @@
 				$querystring .= "item_number=".urlencode($_POST["id"])."&";
 				$querystring .= "custom=".urlencode($_SESSION['id']);
 				
-				//header('location:https://www.sandbox.paypal.com/cgi-bin/webscr'.$querystring);
-				header('location:https://www.paypal.com/cgi-bin/webscr'.$querystring);
+				//url_redirect('https://www.sandbox.paypal.com/cgi-bin/webscr'.$querystring);
+				url_redirect('https://www.paypal.com/cgi-bin/webscr'.$querystring);
 				exit();
 			}
 		}
