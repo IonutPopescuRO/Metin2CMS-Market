@@ -67,7 +67,7 @@
 		?>
 		<p><?php print $lang['listings']; ?></p>
 		<div class="well-items">
-			<div class="row">
+			<div class="row" style="height:20px;">
 				<div class="col-sm-7 border-right" style="color: #AFAFAF;"><?php print $lang['name']; ?></div>
 				<div class="col-sm-3" style="text-align: center; color: #AFAFAF;"><?php print $lang['price']; ?></div>
 			</div>
@@ -111,7 +111,7 @@
 				</div>
 			<?php } ?>
 				<div class="well-items">
-					<div class="row">
+					<div class="row" style="height:20px;">
 						<div class="col-sm-7 border-right" style="color: #AFAFAF;"><?php print $lang['name']; ?></div>
 						<div class="col-sm-2 border-right" style="text-align: center; color: #AFAFAF;"><?php print $lang['quantity']; ?></div>
 						<div class="col-sm-3" style="text-align: center; color: #AFAFAF;"><?php print $lang['price']; ?></div>
