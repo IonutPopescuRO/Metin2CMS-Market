@@ -610,8 +610,9 @@ function get_item_stones_market($id)
 	global $sqlite;
 	
 	$sth = $sqlite->prepare('SELECT socket0, socket1, socket2
-		FROM market
+		FROM item_shop_items
 		WHERE id = ?');
+	
 	$sth->bindParam(1, $id, PDO::PARAM_INT);
 	$sth->execute();
 	$result = $sth->fetchAll();
